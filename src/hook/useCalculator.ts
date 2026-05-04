@@ -76,4 +76,9 @@ export function useCalculator () {
       return t;
     } ) );
   }, [] );
+
+  const activeTerm = useMemo( () => terms.find( t => t.id === activeTermId ) || terms[ 0 ], [ terms, activeTermId ] );
+  const resultVector = useMemo( () => calculateVector( terms ), [ terms ] );
+
+  const copyToClipboard = useCallback( ( text: string ) => navigator.clipboard.writeText( text ), [] );
 }
