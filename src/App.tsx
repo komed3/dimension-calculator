@@ -1,3 +1,7 @@
+import { Layout } from './components/Layout';
+
 export default function App () {
-  return ( <></> );
+  return ( <Layout onReset={ () => undefined }>
+    <></>
+  </Layout> );
 };
