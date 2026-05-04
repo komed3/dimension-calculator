@@ -8,11 +8,7 @@
 }
 
 body {
-  @apply antialiased font-sans text-black;
-}
-
-* {
-  @apply cursor-default;
+  @apply antialiased font-sans text-black cursor-default;
 }
 
 *:focus-visible {
