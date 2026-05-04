@@ -7,22 +7,19 @@ import { calculateVector } from '../utils/calc';
 const generateId = () => Math.random().toString( 36 ).substring( 2, 9 );
 
 export function useCalculator () {
-  const [ terms, setTerms ] = useState< Term[] >( [
-    {
-      id: generateId(),
-      vector: [ 0, 1, 0, 0, 0, 0, 0 ],
-      nextOperator: Operator.DIVIDE,
-      hasOpenParen: false,
-      hasCloseParen: false
-    },
-    {
-      id: generateId(),
-      vector: [ 1, 0, 0, 0, 0, 0, 0 ],
-      nextOperator: Operator.MULTIPLY,
-      hasOpenParen: false,
-      hasCloseParen: false
-    }
-  ] );
+  const [ terms, setTerms ] = useState< Term[] >( [ {
+    id: generateId(),
+    vector: [ 0, 1, 0, 0, 0, 0, 0 ],
+    nextOperator: Operator.DIVIDE,
+    hasOpenParen: false,
+    hasCloseParen: false
+  }, {
+    id: generateId(),
+    vector: [ 1, 0, 0, 0, 0, 0, 0 ],
+    nextOperator: Operator.MULTIPLY,
+    hasOpenParen: false,
+    hasCloseParen: false
+  } ] );
 
   const [ activeTermId, setActiveTermId ] = useState< string | null >( terms[ 0 ]?.id || null );
 
@@ -36,6 +33,7 @@ export function useCalculator () {
       hasOpenParen: false,
       hasCloseParen: false
     } ] );
+
     setActiveTermId( newId );
   }, [] );
 
@@ -45,8 +43,18 @@ export function useCalculator () {
 
       const nextTerms = prev.filter( t => t.id !== id );
       if ( activeTermId === id ) setActiveTermId( nextTerms[ 0 ]?.id || null );
-
       return nextTerms;
     } );
   }, [ activeTermId ] );
+
+  const toggleParen = useCallback( ( termId: string, side: 'open' | 'close' ) => {
+    setTerms( prev => prev.map( t => {
+      if ( t.id === termId ) {
+        if ( side === 'open' ) return { ...t, hasOpenParen: ! t.hasOpenParen };
+        return { ...t, hasCloseParen: ! t.hasCloseParen };
+      }
+
+      return t;
+    } ) );
+  }, [] );
 }
