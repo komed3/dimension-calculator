@@ -57,4 +57,23 @@ export function useCalculator () {
       return t;
     } ) );
   }, [] );
+
+  const updateVectorValue = useCallback( ( termId: string, dimIndex: number, value: number ) => {
+    setTerms( prev => prev.map( t => {
+      if ( t.id === termId ) {
+        const nextVector = [ ...t.vector ] as DimensionVector;
+        nextVector[ dimIndex ] = value;
+        return { ...t, vector: nextVector };
+      }
+
+      return t;
+    } ) );
+  }, [] );
+
+  const updateOperator = useCallback( ( termId: string, op: Operator ) => {
+    setTerms( prev => prev.map( t => {
+      if ( t.id === termId ) return { ...t, nextOperator: op };
+      return t;
+    } ) );
+  }, [] );
 }
