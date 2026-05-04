@@ -17,7 +17,7 @@ export const ResultPanel: React.FC< ResultPanelProps > = ( { result, onCopy } ) 
 
       <div className="flex flex-col gap-3">
         <label className="text-center uppercase font-medium text-xs text-gray-500 tracking-wider">Resultant Vector</label>
-        <div className="flex flex-col justify-center items-center h-min-37 py-6 bg-gray-50/30 border-y border-black overflow-hidden">
+        <div className="flex flex-col justify-center items-center h-min-37 py-6 bg-gray-50 border-y border-black overflow-hidden">
           { result ? ( <>
             <div className="flex justify-center items-center w-full h-12 px-4">
               <svg viewBox="0 0 1000 60" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
