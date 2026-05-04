@@ -28,7 +28,7 @@ export function useCalculator () {
 
     setTerms( prev => [ ...prev, {
       id: newId,
-      vector: INITIAL_VECTOR,
+      vector: [ ...INITIAL_VECTOR ],
       nextOperator: Operator.MULTIPLY,
       hasOpenParen: false,
       hasCloseParen: false

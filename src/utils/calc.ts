@@ -17,7 +17,7 @@ export const validateNesting = ( terms: Term[] ) : boolean => {
 export const calculateVector = ( terms: Term[] ) : DimensionVector | null => {
   if ( ! validateNesting( terms ) ) return null;
 
-  const res = INITIAL_VECTOR;
+  const res = [ ...INITIAL_VECTOR ] as DimensionVector;
   const invertStack: number[] = [ 1 ];
 
   terms.forEach( ( term, idx ) => {
