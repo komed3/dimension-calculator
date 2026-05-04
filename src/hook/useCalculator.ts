@@ -81,4 +81,9 @@ export function useCalculator () {
   const resultVector = useMemo( () => calculateVector( terms ), [ terms ] );
 
   const copyToClipboard = useCallback( ( text: string ) => navigator.clipboard.writeText( text ), [] );
+
+  return {
+    terms, activeTermId, setActiveTermId, activeTerm, resultVector, addTerm, removeTerm,
+    toggleParen, updateVectorValue, updateOperator, copyToClipboard
+  };
 }
