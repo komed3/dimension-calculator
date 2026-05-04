@@ -1,4 +1,5 @@
 import { DimensionInput } from './components/DimensionInput';
+import { Info } from './components/Info';
 import { Layout } from './components/Layout';
 import { ResultPanel } from './components/ResultPanel';
 import { TermEditor } from './components/TermEditor';
@@ -16,8 +17,9 @@ export default function App () {
       />
       { calc.activeTerm && <DimensionInput activeTerm={ calc.activeTerm } onUpdateValue={ calc.updateVectorValue } /> }
     </section>
-    <section className="lg:col-span-4 h-full">
+    <section className="flex flex-col gap-8 lg:col-span-4">
       <ResultPanel result={ calc.resultVector } onCopy={ calc.copyToClipboard } />
+      <Info />
     </section>
   </Layout> );
 };
