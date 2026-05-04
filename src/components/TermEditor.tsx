@@ -15,4 +15,12 @@ interface TermEditorProps {
 
 export const TermEditor: React.FC< TermEditorProps > = ( {
   terms, activeTermId, onSetActive, onAdd, onRemove, onToggleParen, onUpdateOperator
-} ) => {};
+} ) => {
+  const formatVectorString = ( v: number[] ) => `[ ${ v.join( ', ' ) } ]`;
+
+  return (
+    <div className="p-6 space-y-6 border border-black">
+      <h2 className="uppercase font-mono font-medium text-sm tracking-wider text-gray-500">Formula Sequence</h2>
+    </div>
+  );
+};
