@@ -5,6 +5,11 @@ export enum Operator {
   DIVIDE = 'DIVIDE'
 }
 
+export enum ParenSide {
+  OPEN = 'OPEN',
+  CLOSE = 'CLOSE'
+}
+
 export interface Term {
   id: string;
   vector: DimensionVector;

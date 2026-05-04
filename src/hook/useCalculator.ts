@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
 import { INITIAL_VECTOR } from '../const';
 import type { DimensionVector, Term } from '../types';
-import { Operator } from '../types';
+import { Operator, ParenSide } from '../types';
 import { calculateVector } from '../utils/calc';
 
 const generateId = () => Math.random().toString( 36 ).substring( 2, 9 );
@@ -47,10 +47,10 @@ export function useCalculator () {
     } );
   }, [ activeTermId ] );
 
-  const toggleParen = useCallback( ( termId: string, side: 'open' | 'close' ) => {
+  const toggleParen = useCallback( ( termId: string, side: ParenSide ) => {
     setTerms( prev => prev.map( t => {
       if ( t.id === termId ) {
-        if ( side === 'open' ) return { ...t, hasOpenParen: ! t.hasOpenParen };
+        if ( side === ParenSide.OPEN ) return { ...t, hasOpenParen: ! t.hasOpenParen };
         return { ...t, hasCloseParen: ! t.hasCloseParen };
       }
 
