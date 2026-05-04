@@ -1,6 +1,7 @@
 import { AlertTriangle, Copy } from 'lucide-react';
 import type React from 'react';
 import type { DimensionVector } from '../types';
+import { PhysicalForm } from './PhysicalForm';
 
 interface ResultPanelProps {
   result: DimensionVector | null;
@@ -16,7 +17,7 @@ export const ResultPanel: React.FC< ResultPanelProps > = ( { result, onCopy } ) 
 
       <div className="flex flex-col gap-3">
         <label className="text-center uppercase font-medium text-xs text-gray-500 tracking-wider">Resultant Vector</label>
-        <div className="flex flex-col justify-center items-center h-37 py-6 bg-gray-50/30 border-y border-black overflow-hidden">
+        <div className="flex flex-col justify-center items-center h-min-37 py-6 bg-gray-50/30 border-y border-black overflow-hidden">
           { result ? ( <>
             <div className="flex justify-center items-center w-full h-12 px-4">
               <svg viewBox="0 0 1000 60" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
@@ -34,6 +35,17 @@ export const ResultPanel: React.FC< ResultPanelProps > = ( { result, onCopy } ) 
               <AlertTriangle size={ 24 } />
               <span className="uppercase font-mono font-bold text-sm tracking-widest">Invalid Grouping Structure</span>
             </div>
+          ) }
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-3">
+        <label className="text-center uppercase font-medium text-xs text-gray-500 tracking-wider">Physical Form</label>
+        <div className="flex justify-center items-center min-h-35 p-4">
+          { result ? (
+            <div className="scale-110"><PhysicalForm vector={ result } /></div>
+          ) : (
+            <span className="uppercase font-mono text-sm text-gray-300">Calculation Blocked</span>
           ) }
         </div>
       </div>
