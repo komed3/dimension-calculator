@@ -1,0 +1,52 @@
+import { useState, useCallback, useMemo } from 'react';
+import { INITIAL_VECTOR } from '../const';
+import type { DimensionVector, Term } from '../types';
+import { Operator } from '../types';
+import { calculateVector } from '../utils/calc';
+
+const generateId = () => Math.random().toString( 36 ).substring( 2, 9 );
+
+export function useCalculator () {
+  const [ terms, setTerms ] = useState< Term[] >( [
+    {
+      id: generateId(),
+      vector: [ 0, 1, 0, 0, 0, 0, 0 ],
+      nextOperator: Operator.DIVIDE,
+      hasOpenParen: false,
+      hasCloseParen: false
+    },
+    {
+      id: generateId(),
+      vector: [ 1, 0, 0, 0, 0, 0, 0 ],
+      nextOperator: Operator.MULTIPLY,
+      hasOpenParen: false,
+      hasCloseParen: false
+    }
+  ] );
+
+  const [ activeTermId, setActiveTermId ] = useState< string | null >( terms[ 0 ]?.id || null );
+
+  const addTerm = useCallback( () => {
+    const newId = generateId();
+
+    setTerms( prev => [ ...prev, {
+      id: newId,
+      vector: INITIAL_VECTOR,
+      nextOperator: Operator.MULTIPLY,
+      hasOpenParen: false,
+      hasCloseParen: false
+    } ] );
+    setActiveTermId( newId );
+  }, [] );
+
+  const removeTerm = useCallback( ( id: string ) => {
+    setTerms( prev => {
+      if ( prev.length <= 1 ) return prev;
+
+      const nextTerms = prev.filter( t => t.id !== id );
+      if ( activeTermId === id ) setActiveTermId( nextTerms[ 0 ]?.id || null );
+
+      return nextTerms;
+    } );
+  }, [ activeTermId ] );
+}
