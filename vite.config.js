@@ -6,7 +6,7 @@ import { defineConfig } from 'vite';
 export default defineConfig( () => ( {
   base: '/dimension-calculator/',
   plugins: [ react(), tailwindcss() ],
-  resolve: { alias: { '@': resolve( __dirname, '.' ) } },
+  resolve: { alias: { '@': resolve( import.meta.dirname, '.' ) } },
   build: { rollupOptions: { output: { manualChunks ( id ) {
     if ( id.includes( 'node_modules' ) ) {
       if ( id.includes( 'lucide' ) ) return 'icons';
